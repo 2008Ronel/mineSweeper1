@@ -113,36 +113,3 @@ function getTotalMinesAround(i, j) {
 
   return total;
 }
-
-/*
-function getTotalMinesAround(boardI, boardJ, size) {
-  var MinesNegsCount = 0;
-  for (var i = boardI - 1; i <= boardI + 1; i++) {
-    if (i < 0 || i >= size.length) continue;
-    for (var j = boardJ - 1; j <= boardJ + 1; j++) {
-      if (j < 0 || j >= size[i].length) continue;
-
-      if (currCell.isMine) MinesNegsCount++;
-    }
-  }
-
-  console.log(MinesNegsCount);
-  return MinesNegsCount;
-}
-
- function setMinesNegsCount(i, j) {
-     console.log(object);
-   var MinesNegsCount = 0;
-   for (var i = i - 1; i <= i + 1; i++) {
-     if (i < 0 || i >= board.length) continue;
-     for (var j = j - 1; j <= j + 1; j++) {
-       if (j < 0 || j >= board[0].length) continue;
-       if (i === i && j === j) continue;
-
-       if (board[i][j].isMine) MinesNegsCount++;
-     }
-   }
-   console.log(MinesNegsCount);
-   return MinesNegsCount;
- 
-*/
