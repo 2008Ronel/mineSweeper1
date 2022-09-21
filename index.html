@@ -7,10 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="mineSweeper.css">
     <title>mineSweeper</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
 </head>
 <header>
     <h1>mineSweeper</h1>
-    <h2>Mines: <span class="mines-count">0</span></h2>
     <h2>Game Time:<div class="timer">0.000</div>
     </h2>
 </header>
@@ -20,7 +20,6 @@
 
 
     <div class="container"></div>
-    <button class="new" onclick="initGame()"> New Game</button>
     <button class="btn" onclick="initGame(4, 2)"> Beginner</button>
     <button class="btn" onclick="initGame(8, 14)"> Medium</button>
     <button class="btn" onclick="initGame(12, 32)"> Expert</button>
@@ -32,7 +31,11 @@
 
     </table>
 
+    <div class="boom">
+        <p class="txt">GAME 💣💣💣 OVeeeR </p>
+        <p class="tryAgain">If you want to try again, please select a difficulty level </p>
 
+    </div>
     <script src="mineSweeper.js"></script>
 </body>
 

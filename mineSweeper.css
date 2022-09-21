@@ -2,6 +2,11 @@ header {
     background-color:yellow ;
 }
 
+
+.timer {
+    font-size: 30px;
+}
+
 body {
 
     font-family: Arial, Helvetica, sans-serif;
@@ -9,46 +14,23 @@ body {
     text-align: center;
 display: flex;
 flex-direction: column;
-background-image: url(../mineSweeper/img/2.jpg) ;
+background-image: url() ;
 background-attachment: fixed;
-/*background-repeat: no-repeat;*/
+background-size: 100%;
+background-repeat: no-repeat;
 }
 
 .board {
     width: 500px;
     height: 500px;
     border: 15px solid rgb(0, 201, 104);
-    background-color: burlywood;
+    background-color: rgb(0, 0, 0);
     align-self: center;
   
 }
 
-.new {
 
-    margin-top: 30px;
-    display: inline;
-    padding: 15px 25px;
-    font-size: 24px;
-    cursor: pointer;
-    text-align: center;
-    text-decoration: none;
-    outline: none;
-    color: rgb(0, 0, 0);
-    background-color: #ffffff;
-    border: none;
-    border-radius: 15px;
-    box-shadow: 0 9px #999;
 
-}
-
-.new:hover {background-color: #fffbf3}
-      
-      .new:active {
-        background-color: #3e8e41;
-        box-shadow: 0 5px #666;
-        transform: translateY(4px);
-
-      }
 .btn {
     margin-top: 10px;
     
@@ -72,7 +54,58 @@ background-attachment: fixed;
         background-color: #3e8e41;
         box-shadow: 0 5px #666;
         transform: translateY(4px);
+
+      }
+
+
+
+.new {
+    
+    margin-top: 30px;
+    padding: 15px 25px;
+    font-size: 24px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: rgb(215, 162, 28);
+    background-color: #080808;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #999;
+
 }
+
+.new:hover {background-color: #fffbf3}
+      
+      .new:active {
+        background-color: #3e8e41;
+        box-shadow: 0 5px #666;
+        transform: translateY(4px);
+
+      }
+
+
+.boom {
+    display: none;
+}
+
+.txt {
+    font-family: "Sofia", sans-serif;
+    font-size: 50px;
+}
+
+.tryAgain {
+    font-size: 50px;
+
+}
+
+  .disabled {
+    pointer-events: none;
+    cursor: not-allowed;
+  }
+  
+
 /*
 .cell {
 
