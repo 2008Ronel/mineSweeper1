@@ -9,34 +9,61 @@
     <title>mineSweeper</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
 </head>
+
 <header>
-    <h1>mineSweeper</h1>
     <h2>Game Time:<div class="timer">0.000</div>
     </h2>
+    <div class="lives">lives: </div>
+
+
+    <button class="smiley" onclick="restart()"> 😁</button>
+
 </header>
 
 <body>
 
-
-
-    <div class="container"></div>
-    <button class="btn" onclick="initGame(4, 2)"> Beginner</button>
-    <button class="btn" onclick="initGame(8, 14)"> Medium</button>
-    <button class="btn" onclick="initGame(12, 32)"> Expert</button>
+    <div class="container">
+        <button class="btn" onclick="initGame(4, 5)"> Beginner</button>
+        <button class="btn" onclick="initGame(8, 14)"> Medium</button>
+        <button class="btn" onclick="initGame(12, 32)"> Expert</button>
     </div>
 
 
-    <table border="1" cellpadding="80">
+    <div class="modal">
+        <div class="modal-content">
+            <img src="img/2.jpg" class="image" alt="">
+        </div>
+    </div>
+
+
+    <table border="1" cellpadding="40" width="50" hight="50">
         <tbody class="board"></tbody>
 
     </table>
+
 
     <div class="boom">
         <p class="txt">GAME 💣💣💣 OVeeeR </p>
         <p class="tryAgain">If you want to try again, please select a difficulty level </p>
 
     </div>
-    <script src="mineSweeper.js"></script>
+
+
+    <div class="winner">
+        <p>You alive, You alive, You alive </p>
+        <p>If you want to try again, please select a difficulty level </p>
+    </div>
+
+
+    <button id="button" oncontextmenu="event.preventDefault();">
+    </button>
+    <p id="log"></p>
+
+
+    <div oncontextmenu="myFunction()" contextmenu="mymenu">
+
+
+        <script src="mineSweeper.js"></script>
 </body>
 
 </html>
