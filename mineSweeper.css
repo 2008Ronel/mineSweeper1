@@ -5,15 +5,19 @@ header {
 
 .lives {
   font-size: 50px;
+  background-color: #d7fd00;
 }
 
 .timer {
     font-size: 50px;
+  background-color: #a1bd00;
+
     
 
 }
 .smiley {
   font-size: 50px;
+  
 }
 
 
@@ -37,7 +41,7 @@ background-repeat: no-repeat;
     border: 15px solid rgb(0, 201, 104);
     background-color: rgb(83, 38, 6);
     align-self: center;
-  
+    
 }
 
 
@@ -98,20 +102,19 @@ background-repeat: no-repeat;
 .boom {
     display: none;
     background-color: #e5e900;
-    color:#f90e0e
-}
-
-.txt, .tryAgain {
+    color:#f90e0e ;
     font-family: "Sofia", sans-serif;
     font-size: 50px;
 }
 
+
+
 .winner {
   display: none;
-  font-family: "Sofia", sans-serif; 
+  background-color: #e5e900;
+  color:#f90e0e ;
+  font-family: "Sofia", sans-serif;
   font-size: 50px;
-  color:#f90e0e
-  background-color yellow
 
 }
 
@@ -150,5 +153,11 @@ background-repeat: no-repeat;
   height: 50px;
 width: 50px;
 
+}
+*/
+
+/*
+.timer {
+  margin-left: 100%;
 }
 */

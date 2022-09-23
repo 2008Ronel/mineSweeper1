@@ -2,11 +2,9 @@
 
 const MINE = '💣';
 const notMine = '✅';
-const flagw = '🚩';
 
 var gTimeInterval;
 var gStartTime;
-var goodStep = 0;
 
 var board;
 
@@ -15,6 +13,7 @@ var life = document.querySelector('.lives');
 var mood = document.querySelector('.smiley');
 var boardEl = document.querySelector('.board');
 var modalEl = document.querySelector('.modal');
+var dis = document.querySelector('.disabled');
 
 var gGame = {
   isOn: false,
@@ -27,8 +26,10 @@ var gGame = {
   totalMines: 0,
 };
 
-function initGame(size = 4, mines = 5) {
+function initGame(size = 4, mines = 4) {
   gGame.lives = 3;
+  gGame.markedCount = 0;
+  startTimer();
   gGame.totalCells = size * size;
   gGame.totalMines = mines;
   gGame.shownCount = 0;
@@ -44,13 +45,19 @@ function initGame(size = 4, mines = 5) {
     document.querySelector('.winner').style.display = 'none';
     boardEl.classList.remove('disabled');
     document.querySelector('.boom').style.display = 'none';
-    modalEl.style.display = 'none';
-
-    startTimer();
   }
 }
 
 function onCellClicked(el, i, j) {
+  var currCell = board[i][j];
+
+  if (currCell.isShown) {
+    return;
+  } else {
+    currCell.isShown = true;
+    gGame.shownCount++;
+  }
+
   var hasWon = checkPlayerWon();
 
   if (hasWon) {
@@ -58,11 +65,11 @@ function onCellClicked(el, i, j) {
     // WON
     wonGame();
   } else {
-    var currCell = board[i][j];
     if (currCell.isMarked) {
       currCell.isMarked = false;
       gGame.markedCount--;
     }
+
     const minesAroundCell = getTotalMinesAround(i, j);
 
     if (minesAroundCell === 0) el.style.color = 'green';
@@ -71,19 +78,17 @@ function onCellClicked(el, i, j) {
     if (minesAroundCell === 3) el.style.color = 'red';
     if (minesAroundCell === 4) el.style.color = 'blue';
 
-    currCell.isShown = true;
     if (currCell.isMine) {
       el.textContent = MINE;
+      boomSound();
       if (gGame.lives > 1) {
         gGame.lives--;
         life.innerText = 'lives: ' + gGame.lives;
       } else gameOver();
     } else {
+      goodStep();
       el.textContent = minesAroundCell;
-      goodStep++;
     }
-
-    gGame.shownCount++;
   }
 }
 
@@ -166,26 +171,31 @@ function getTotalMinesAround(i, j) {
 function checkPlayerWon() {
   var hasWon;
   if (
-    gGame.totalCells === gGame.shownCount - gGame.totalMines &&
-    gGame.markedCount === gGame.totalMines
+    gGame.totalCells === gGame.shownCount - gGame.totalMines ||
+    gGame.totalCells === gGame.markedCount + gGame.totalMines ||
+    gGame.totalCells <= gGame.shownCount + gGame.markedCount ||
+    (gGame.totalCells === gGame.shownCount && gGame.lives >= 1)
   ) {
     hasWon = true;
   } else {
     hasWon = false;
   }
 
+  console.log('totalCells', gGame.totalCells);
+  console.log('shownCount', gGame.shownCount);
+  console.log('markedCount', gGame.markedCount);
+  console.log('totalMines', gGame.totalMines);
   return hasWon;
 }
 
 function gameOver() {
   gGame.isOn = false;
   stopTimer();
-
   boardEl.classList.add('disabled');
   document.querySelector('.container').style.display = 'block';
   document.querySelector('.boom').style.display = 'block';
-  document.querySelector('.winner').style.display = 'none';
   mood.innerText = '🤯';
+  loseSound();
 
   life.innerText = 'lives: 0';
   gGame.isWin = false;
@@ -194,19 +204,13 @@ function gameOver() {
 function wonGame() {
   gGame.isOn = false;
   gGame.isWin = true;
+  winSound();
   stopTimer();
-  //var Audio = new Audio('..')
+
   boardEl.classList.add('disabled');
   document.querySelector('.winner').style.display = 'block';
   document.querySelector('.container').style.display = 'block';
 
-  document.querySelector('.modal');
-
-  modalEl.style.display = 'block';
-
-  setTimeout(function () {
-    modalEl.style.display = 'none';
-  }, 3000);
   mood.innerText = '😎';
 }
 
@@ -235,12 +239,13 @@ document.addEventListener('contextmenu', (ev) => {
 });
 
 function restart() {
-  gameOver();
   initGame();
 }
 
 function markCell(el, i, j) {
   var currCell = board[i][j];
+
+  if (gGame.markedCount === gGame.totalMines) return;
 
   if (currCell.isShown) return;
   if (currCell.isMarked) {
@@ -252,4 +257,24 @@ function markCell(el, i, j) {
   }
 
   currCell.isMarked = !currCell.isMarked;
+}
+
+function loseSound() {
+  let everyBody = new Audio('everyBody.mp3');
+  everyBody.play();
+}
+
+function winSound() {
+  let NoTimeToDie = new Audio('NoTimeToDie.mp3');
+  NoTimeToDie.play();
+}
+
+function boomSound() {
+  let boom = new Audio('boom.mp4');
+  boom.play();
+}
+
+function goodStep() {
+  let step = new Audio('goodStep.mp4');
+  step.play();
 }
