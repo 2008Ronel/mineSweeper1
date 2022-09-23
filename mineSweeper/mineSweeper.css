@@ -1,0 +1,163 @@
+header {
+    background-color:yellow ;
+   
+}
+
+.lives {
+  font-size: 50px;
+  background-color: #d7fd00;
+}
+
+.timer {
+    font-size: 50px;
+  background-color: #a1bd00;
+
+    
+
+}
+.smiley {
+  font-size: 50px;
+  
+}
+
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    text-align: center;
+display: flex;
+flex-direction: column;
+background-image: url(img/1-t.png) ;
+background-attachment: fixed;
+background-size: 100%;
+background-repeat: no-repeat;
+}
+
+
+.board, table {
+    width: 300px;
+    height: 300px;
+    font-size: 30px;
+    border: 15px solid rgb(0, 201, 104);
+    background-color: rgb(83, 38, 6);
+    align-self: center;
+    
+}
+
+
+.btn {
+    margin-top: 10px;
+    
+        display: inline;
+        padding: 15px 25px;
+        font-size: 50px;
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+        outline: none;
+        color: rgb(0, 0, 0);
+        background-color: #ff0000;
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 9px #999;
+      }
+      
+      button:hover {background-color: #e5e900}
+      
+      button:active {
+        background-color: #3e8e41;
+        box-shadow: 0 5px #666;
+        transform: translateY(4px);
+
+      }
+
+
+.new {
+    
+    margin-top: 30px;
+    padding: 15px 25px;
+    font-size: 24px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: rgb(215, 162, 28);
+    background-color: #080808;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #999;
+
+}
+
+.new:hover {background-color: #fffbf3}
+      
+      .new:active {
+        background-color: #3e8e41;
+        box-shadow: 0 5px #666;
+        transform: translateY(4px);
+
+      }
+
+
+.boom {
+    display: none;
+    background-color: #e5e900;
+    color:#f90e0e ;
+    font-family: "Sofia", sans-serif;
+    font-size: 50px;
+}
+
+
+
+.winner {
+  display: none;
+  background-color: #e5e900;
+  color:#f90e0e ;
+  font-family: "Sofia", sans-serif;
+  font-size: 50px;
+
+}
+
+  .disabled {
+    pointer-events: none;
+    cursor: not-allowed;
+  }
+  
+
+  .modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+  /* Modal Content/Box */
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+  }
+  
+ 
+
+/*
+.cell {
+  height: 50px;
+width: 50px;
+
+}
+*/
+
+/*
+.timer {
+  margin-left: 100%;
+}
+*/
