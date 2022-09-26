@@ -1,7 +1,7 @@
 'use strict';
 
 const MINE = '💣';
-const notMine = '✅';
+const notMine = '';
 
 var gTimeInterval;
 var gStartTime;
@@ -12,28 +12,26 @@ var flag = document.querySelector('.addFlags');
 var life = document.querySelector('.lives');
 var mood = document.querySelector('.smiley');
 var boardEl = document.querySelector('.board');
-var modalEl = document.querySelector('.modal');
+//var modalEl = document.querySelector('.modal');
 var dis = document.querySelector('.disabled');
+var gGame;
 
-var gGame = {
-  isOn: false,
-  isWin: false,
-  shownCount: 0,
-  markedCount: 0,
-  secsPassed: 0,
-  lives: 3,
-  totalCells: 0,
-  totalMines: 0,
-};
-
-function initGame(size = 4, mines = 4) {
-  gGame.lives = 3;
-  gGame.markedCount = 0;
-  startTimer();
-  gGame.totalCells = size * size;
-  gGame.totalMines = mines;
-  gGame.shownCount = 0;
+function initGame(size = 4, mines = 4, lives = 3) {
   mood.innerText = '😁';
+
+  gGame = {
+    isOn: false,
+    isWin: false,
+    shownCount: 0,
+    markedCount: 0,
+    secsPassed: 0,
+    lives,
+    totalCells: size * size,
+    totalMines: mines,
+    safeClicks: 3,
+  };
+
+  startTimer();
 
   if (!gGame.isOn) {
     gGame.isOn = true;
@@ -54,6 +52,10 @@ function onCellClicked(el, i, j) {
   if (currCell.isShown) {
     return;
   } else {
+    if (currCell.isMarked) {
+      currCell.isMarked = false;
+      gGame.markedCount--;
+    }
     currCell.isShown = true;
     gGame.shownCount++;
   }
@@ -61,15 +63,8 @@ function onCellClicked(el, i, j) {
   var hasWon = checkPlayerWon();
 
   if (hasWon) {
-    console.log('WON');
-    // WON
     wonGame();
   } else {
-    if (currCell.isMarked) {
-      currCell.isMarked = false;
-      gGame.markedCount--;
-    }
-
     const minesAroundCell = getTotalMinesAround(i, j);
 
     if (minesAroundCell === 0) el.style.color = 'green';
@@ -81,6 +76,7 @@ function onCellClicked(el, i, j) {
     if (currCell.isMine) {
       el.textContent = MINE;
       boomSound();
+
       if (gGame.lives > 1) {
         gGame.lives--;
         life.innerText = 'lives: ' + gGame.lives;
@@ -101,6 +97,8 @@ function createBoard(size, mines) {
         isShown: false,
         isMine: false,
         isMarked: false,
+        i,
+        j,
       };
     }
   }
@@ -126,6 +124,7 @@ function renderBoard(board) {
       var currCell = board[i][j];
 
       strHTML += `<td class="cell"
+            id="${i},${j}"
             data-i="${i}" data-j="${j}"
             oncontextmenu="markCell(this,${i},${j})"
             onclick="onCellClicked(this,${i},${j})">
@@ -171,20 +170,21 @@ function getTotalMinesAround(i, j) {
 function checkPlayerWon() {
   var hasWon;
   if (
-    gGame.totalCells === gGame.shownCount - gGame.totalMines ||
-    gGame.totalCells === gGame.markedCount + gGame.totalMines ||
-    gGame.totalCells <= gGame.shownCount + gGame.markedCount ||
-    (gGame.totalCells === gGame.shownCount && gGame.lives >= 1)
+    gGame.totalCells <= gGame.shownCount + gGame.markedCount &&
+    gGame.lives >= 1
+    /*||
+      
+    (gGame.totalCells === gGame.markedCount + gGame.totalMines &&
+      gGame.lives >= 1) ||
+    (gGame.totalCells <= gGame.shownCount + gGame.markedCount &&
+      gGame.lives >= 1)
+      */
   ) {
     hasWon = true;
   } else {
     hasWon = false;
   }
 
-  console.log('totalCells', gGame.totalCells);
-  console.log('shownCount', gGame.shownCount);
-  console.log('markedCount', gGame.markedCount);
-  console.log('totalMines', gGame.totalMines);
   return hasWon;
 }
 
@@ -257,6 +257,9 @@ function markCell(el, i, j) {
   }
 
   currCell.isMarked = !currCell.isMarked;
+
+  var hasWon = checkPlayerWon();
+  if (hasWon) wonGame();
 }
 
 function loseSound() {
@@ -278,3 +281,42 @@ function goodStep() {
   let step = new Audio('goodStep.mp4');
   step.play();
 }
+
+function safeClick() {
+  if (gGame.safeClicks) {
+    gGame.safeClicks--;
+    var safeCell = getSafeCell();
+    var safeCellEl = document.getElementById(`${safeCell.i},${safeCell.j}`);
+
+    safeCellEl.classList.add('safeCell');
+    setTimeout(function () {
+      safeCellEl.classList.remove('safeCell');
+    }, 1000);
+  }
+}
+
+function getSafeCell() {
+  var checkSafe = [];
+  for (var i = 0; i < board.length; i++) {
+    for (var j = 0; j < board.length; j++) {
+      var currCell = board[i][j];
+
+      if (!currCell.isMine && !currCell.isShown) {
+        checkSafe.push(currCell);
+      }
+    }
+  }
+
+  const randIdx = getRandomInt(0, checkSafe.length);
+  return checkSafe[randIdx];
+}
+
+// document.querySelector('.check').addEventListener('click', function () {
+//   document.querySelector('.check').style.color = 'blue';
+// });
+
+/*
+function getGhostHTML(ghost) {
+  var color = gPacman.isSuper ? 'blue' : ghost.color;
+  return `<span style = "color: ${color}" >${GHOST}</span>`;
+*/
