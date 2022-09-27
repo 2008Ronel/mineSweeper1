@@ -1,16 +1,16 @@
 header {
-    background-color:yellow ;
+    background-color:#f36e6e ;
    
 }
 
 .lives {
   font-size: 50px;
-  background-color: #d7fd00;
+  background-color: #edf376;
 }
 
 .timer {
     font-size: 50px;
-  background-color: #a1bd00;
+  background-color: #79e881;
 
     
 
@@ -38,8 +38,8 @@ background-repeat: no-repeat;
     width: 300px;
     height: 300px;
     font-size: 30px;
-    border: 15px solid rgb(0, 201, 104);
-    background-color: rgb(83, 38, 6);
+    border: 15px solid #000000;
+    background-color: rgb(109, 66, 35);
     align-self: center;
     
 }
@@ -56,13 +56,13 @@ background-repeat: no-repeat;
         text-decoration: none;
         outline: none;
         color: rgb(0, 0, 0);
-        background-color: #ff0000;
+        background-color: #79e881;
         border: none;
         border-radius: 15px;
         box-shadow: 0 9px #999;
       }
       
-      button:hover {background-color: #e5e900}
+      button:hover {background-color: #edf376}
       
       button:active {
         background-color: #3e8e41;
@@ -101,8 +101,8 @@ background-repeat: no-repeat;
 
 .boom {
     display: none;
-    background-color: #e5e900;
-    color:#f90e0e ;
+    background-color: #ffffff;
+    color:#000000 ;
     font-family: "Sofia", sans-serif;
     font-size: 50px;
 }
@@ -111,8 +111,8 @@ background-repeat: no-repeat;
 
 .winner {
   display: none;
-  background-color: #e5e900;
-  color:#f90e0e ;
+  background-color: #f36e6e;
+  color:#79e881 ;
   font-family: "Sofia", sans-serif;
   font-size: 50px;
 
@@ -123,32 +123,13 @@ background-repeat: no-repeat;
     cursor: not-allowed;
   }
   
-
-  .modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-  }
-  
-  /* Modal Content/Box */
-  .modal-content {
-    background-color: #fefefe;
-    margin: 15% auto; /* 15% from the top and centered */
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%; /* Could be more or less, depending on screen size */
-  }
-  
  
   .safeCell {
     background-color: white;
+  }
+
+  .safe {
+    align-self: center;
   }
 
 /*

@@ -12,12 +12,13 @@ var flag = document.querySelector('.addFlags');
 var life = document.querySelector('.lives');
 var mood = document.querySelector('.smiley');
 var boardEl = document.querySelector('.board');
-//var modalEl = document.querySelector('.modal');
+var safePlace = document.querySelector('.safe');
 var dis = document.querySelector('.disabled');
 var gGame;
 
 function initGame(size = 4, mines = 4, lives = 3) {
   mood.innerText = '😁';
+  document.querySelector('.safe').style.display = 'inline';
 
   gGame = {
     isOn: false,
@@ -194,6 +195,8 @@ function gameOver() {
   boardEl.classList.add('disabled');
   document.querySelector('.container').style.display = 'block';
   document.querySelector('.boom').style.display = 'block';
+  document.querySelector('.safe').style.display = 'none';
+
   mood.innerText = '🤯';
   loseSound();
 
@@ -210,6 +213,7 @@ function wonGame() {
   boardEl.classList.add('disabled');
   document.querySelector('.winner').style.display = 'block';
   document.querySelector('.container').style.display = 'block';
+  document.querySelector('.safe').style.display = 'none';
 
   mood.innerText = '😎';
 }
@@ -273,7 +277,7 @@ function winSound() {
 }
 
 function boomSound() {
-  let boom = new Audio('boom.mp4');
+  let boom = new Audio('boom.mp3');
   boom.play();
 }
 
